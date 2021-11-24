@@ -39,6 +39,39 @@ Route::middleware(['auth'])->group(function () {
 
         return view('dashboard/user', compact('user'));
     });
+
+
+    Route::get('/hapus/{user}', function (User $user) {
+        $user->delete();
+        return redirect()->back();
+    });
+    Route::post('/update', function (Request $request) {
+
+        if ($request->foto) {
+            $foto = $request->file('foto')->getClientOriginalName();
+            $request->file('foto')->storeAs('public/user', $request->file('foto')->getClientOriginalName());
+        } else {
+            $foto = $request->foto_backup;
+        }
+
+        if ($request->password) {
+            $password = bcrypt($request->password);
+        } else {
+            $password = $request->password_backup;
+        }
+
+        User::where('id', $request->id)->update([
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'password' => $password,
+            'foto' => $foto,
+            'nip' => $request->nip,
+            'alamat' => $request->alamat,
+            'no_telp' => $request->no_telp,
+        ]);
+
+        return redirect()->back();
+    });
     Route::get('/logout', [LoginController::class, 'logout']);
 });
 
