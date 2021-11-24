@@ -101,13 +101,13 @@ class ApiController extends Controller
     public function getCekinCekout(User $user)
     {
         $cekin = CheckIn::where("user_id", $user->id)
-            ->where("tanggal", date("Y-m-d"))
-            ->first()
-            ->pluck("jam");
+            ->where("tanggal", Carbon::now()->format("Y-m-d"))
+            ->pluck("jam")
+            ->first();
         $cekout = CheckOut::where("user_id", $user->id)
-            ->where("tanggal", date("Y-m-d"))
-            ->first()
-            ->pluck("jam");
+            ->where("tanggal", Carbon::now()->format("Y-m-d"))
+            ->pluck("jam")
+            ->first();
         $data = [
             "cekin" => $cekin,
             "cekout" => $cekout
