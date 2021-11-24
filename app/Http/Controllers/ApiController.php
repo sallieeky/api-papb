@@ -97,4 +97,21 @@ class ApiController extends Controller
         }
         return response()->json($data);
     }
+
+    public function getCekinCekout(User $user)
+    {
+        $cekin = CheckIn::where("user_id", $user->id)
+            ->where("tanggal", date("Y-m-d"))
+            ->first()
+            ->pluck("jam");
+        $cekout = CheckOut::where("user_id", $user->id)
+            ->where("tanggal", date("Y-m-d"))
+            ->first()
+            ->pluck("jam");
+        $data = [
+            "cekin" => $cekin,
+            "cekout" => $cekout
+        ];
+        return response()->json($data);
+    }
 }

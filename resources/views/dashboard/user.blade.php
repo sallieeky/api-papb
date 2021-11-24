@@ -44,8 +44,8 @@
                                 </ul>
                             </td>
                             
-                            @endforeach
                         </tr>
+                        @endforeach
                         
                     </tbody>
                 </table>
