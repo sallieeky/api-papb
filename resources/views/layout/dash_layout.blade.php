@@ -107,7 +107,7 @@
                                 <a href="{{url("/checkin")}}"> Check In Pengguna </a>
                                 <a href="{{url("/checkout")}}"> Check Out Pengguna </a>
                                 <a href="{{url("/user")}}">Manajemen Pengguna</a>
-                                <a href=""> Log Out </a>
+                                <a href="{{ url("/logout") }}"> Log Out </a>
                                 
                             </li>
                         </ul>
